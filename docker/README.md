@@ -10,6 +10,8 @@ docker pull postgres:15.2
 
 ### Create volume
 
+[Resource](https://rhiyo.github.io/post/2021-4-21-running-postgres-in-docker-container-with-mounted-volume/).
+
 Create volume to store the database data:
 
 ```bash
@@ -36,6 +38,8 @@ Explanation:
 - PGDATA: tells PostgreSQL where it should store the database.
 
 ### Create table
+
+[Resource](https://phoenixnap.com/kb/deploy-postgresql-on-docker).
 
 To connect to the db we have to connect to the `postgres-container` container as the user `postgres` using `psql`.
 
@@ -86,14 +90,4 @@ VALUES
 ```bash
 docker stop postgres-container
 ```
-
-## Resources
-
-Create db:
-
-<https://phoenixnap.com/kb/deploy-postgresql-on-docker>
-
-Work with the volume:
-
-<https://rhiyo.github.io/post/2021-4-21-running-postgres-in-docker-container-with-mounted-volume/>
 
