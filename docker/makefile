@@ -4,7 +4,7 @@ CONTAINER_VOLUME=db_postgres
 IMAGE_NAME=postgres
 IMAGE_VERSION=15.2
 POSTGRES_USER=postgres
-POSTGRES_PW=mysecretpassword
+POSTGRES_PW=pw
 
 pull-image:
 	docker pull $(CONTAINER_NAME):$(IMAGE_VERSION)
