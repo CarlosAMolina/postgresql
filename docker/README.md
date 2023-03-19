@@ -1,4 +1,6 @@
-## Steps
+## Run
+
+### Pull Docker image
 
 Pull image (available versions at this [link](https://hub.docker.com/_/postgres/)).
 
@@ -6,11 +8,15 @@ Pull image (available versions at this [link](https://hub.docker.com/_/postgres/
 docker pull postgres:15.2
 ```
 
+### Create volume
+
 Create volume to store the database data:
 
 ```bash
 docker volume create db_postgres
 ```
+
+### Run container
 
 Start a PostgreSQL instance:
 
@@ -29,16 +35,20 @@ Explanation:
 
 - PGDATA: tells PostgreSQL where it should store the database.
 
-Now:
+### Create table
+
+To connect to the db we have to connect to the `postgres-container` container as the user `postgres` using `psql`.
+
+```bash
+docker exec -it postgres-container /bin/bash
+psql -U postgres
+```
+
+This can be done with only one command:
 
 ```bash
 docker exec -it postgres-container psql -U postgres
 ```
-
-Explanation:
-
-- Connect to the `postgres-container` container name as the user `postgres`.
-- Enable psql.
 
 To configure the db:
 
@@ -71,7 +81,7 @@ VALUES
 \q
 ```
 
-Stop container:
+### Stop container
 
 ```bash
 docker stop postgres-container
