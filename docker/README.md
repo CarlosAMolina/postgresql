@@ -85,6 +85,35 @@ VALUES
 \q
 ```
 
+### Export and import the database
+
+#### Export the database
+
+[Resource](https://kinsta.com/docs/import-export-postgresql-database-command-line/#import-a-postgresql-database).
+
+```bash
+docker exec -it postgres-container /bin/bash
+pg_dump -U postgres -d contacts > contacts.sql
+```
+
+#### Import the database
+
+[Resource](https://kinsta.com/docs/import-export-postgresql-database-command-line/#import-a-postgresql-database).
+
+First, connect to the container:
+
+```bash
+psql -U postgres < contacts.sql
+```
+
+If the database does not exit:
+
+```bash
+pg_dump -U postgres < contacts.sql
+```
+
+The previous command will import the data to the db postgres, not not the db contacts.
+
 ### Stop container
 
 ```bash
