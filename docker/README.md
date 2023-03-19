@@ -9,9 +9,49 @@ docker pull postgres:15.2
 Start a Postgres instance:
 
 ```bash
-docker run --name some-postgres -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+docker run --name postgres-container -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+```
+
+Now, we:
+
+- Connect to the `postgres-container` container name as the user `postgres`.
+- Enable psql.
+
+```bash
+docker exec -it postgres-container psql -U postgres
+```
+
+To configure the db:
+
+```bash
+# Create db.
+create database contacts;
+# Show the current databases.
+\l
+# Connect to the db as the postgres user.
+\c contacts
+# Create a schema that helps you get a logical representation of the database structure.
+create schema contacts;
+# Create table.
+CREATE TABLE users (
+	id INT PRIMARY KEY,
+	name VARCHAR ( 50 ) NOT NULL,
+	surname VARCHAR ( 50 ) NULL
+);
+# Show tables in current schema.
+\dt
+# Show table details.
+\d+ users;
+# Insert data.
+INSERT INTO
+    users (id, name, surname)
+VALUES
+    (1, 'John','Doe'),
+    (2, 'Foo Name','Bar Surname');
+# Exit the container.
+\q
 ```
 
 ## Resources
 
-Tutorial: <https://www.docker.com/blog/how-to-use-the-postgres-docker-official-image/>
+Tutorial: <https://phoenixnap.com/kb/deploy-postgresql-on-docker>
