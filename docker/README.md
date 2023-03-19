@@ -6,25 +6,39 @@ Pull image (available versions at this [link](https://hub.docker.com/_/postgres/
 docker pull postgres:15.2
 ```
 
-Start a Postgres instance:
+Create volume to store the database data:
+
+```bash
+docker volume create db_postgres
+```
+
+Start a PostgreSQL instance:
 
 ```bash
 docker run \
     --rm \
     -d \
     --name postgres-container \
+    -v db_postgres:/home/postgres/data \
     -e POSTGRES_PASSWORD=mysecretpassword \
+    -e PGDATA=/home/postgres/data \
     postgres
 ```
 
-Now, we:
+Explanation:
 
-- Connect to the `postgres-container` container name as the user `postgres`.
-- Enable psql.
+- PGDATA: tells PostgreSQL where it should store the database.
+
+Now:
 
 ```bash
 docker exec -it postgres-container psql -U postgres
 ```
+
+Explanation:
+
+- Connect to the `postgres-container` container name as the user `postgres`.
+- Enable psql.
 
 To configure the db:
 
@@ -57,6 +71,19 @@ VALUES
 \q
 ```
 
+Stop container:
+
+```bash
+docker stop postgres-container
+```
+
 ## Resources
 
-Tutorial: <https://phoenixnap.com/kb/deploy-postgresql-on-docker>
+Create db:
+
+<https://phoenixnap.com/kb/deploy-postgresql-on-docker>
+
+Work with the volume:
+
+<https://rhiyo.github.io/post/2021-4-21-running-postgres-in-docker-container-with-mounted-volume/>
+
