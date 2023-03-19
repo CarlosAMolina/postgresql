@@ -9,7 +9,12 @@ docker pull postgres:15.2
 Start a Postgres instance:
 
 ```bash
-docker run --name postgres-container -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+docker run \
+    --rm \
+    -d \
+    --name postgres-container \
+    -e POSTGRES_PASSWORD=mysecretpassword \
+    postgres
 ```
 
 Now, we:
