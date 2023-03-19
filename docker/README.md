@@ -5,7 +5,7 @@
 Pull image (available versions at this [link](https://hub.docker.com/_/postgres/)).
 
 ```bash
-docker pull postgres:15.2
+make pull-image
 ```
 
 ### Create volume
@@ -26,15 +26,9 @@ Start a PostgreSQL instance:
 make run
 ```
 
-Explanation:
-
-- PGDATA: tells PostgreSQL where it should store the database.
-
 ### Create table
 
 [Resource](https://phoenixnap.com/kb/deploy-postgresql-on-docker).
-
-To connect to the db we have to connect to the `postgres-container` container as the user `postgres` using `psql`.
 
 ```bash
 make connect
@@ -106,7 +100,7 @@ If the database does not exit:
 pg_dump -U postgres < contacts.sql
 ```
 
-The previous command will import the data to the db postgres, not not the db contacts.
+The previous command will import the data to the db postgres, not to the db contacts.
 
 ### Stop container
 

@@ -2,13 +2,18 @@ CONTAINER_DATA_PATHNAME=/home/postgres/data
 CONTAINER_NAME=postgres-container
 CONTAINER_VOLUME=db_postgres
 IMAGE_NAME=postgres
+IMAGE_VERSION=15.2
 POSTGRES_USER=postgres
 POSTGRES_PW=mysecretpassword
+
+pull-image:
+	docker pull $(CONTAINER_NAME):$(IMAGE_VERSION)
 
 create-volume:
 	docker volume create $(CONTAINER_VOLUME)
 
 run:
+	# PGDATA: tells PostgreSQL where it should store the database.
 	docker run \
 		--rm \
 		-d \
