@@ -52,6 +52,14 @@ create database contacts;
 \c contacts
 # Create a schema that helps you get a logical representation of the database structure.
 create schema contacts;
+# List schemas.
+\dn
+# Add the new schema to the search path to work with tables in this schema without specifying the schema name.
+SET search_path TO contacts, public;
+# Show schema search path.
+SHOW search_path;
+# Show current schema.
+SELECT current_schema();
 # Create table.
 CREATE TABLE users (
 	id INT PRIMARY KEY,
@@ -67,40 +75,56 @@ INSERT INTO
     users (id, name, surname)
 VALUES
     (1, 'John','Doe'),
-    (2, 'Foo Name','Bar Surname');
+    (2, 'Foo Name','Bar Surname')
+;
 # Exit the container.
 \q
 ```
+
+Resources:
+- [Create db](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/).
+- [Schema](https://www.postgresqltutorial.com/postgresql-administration/postgresql-schema/).
 
 ### Export and import the database
 
 #### Export the database
 
-[Resource](https://kinsta.com/docs/import-export-postgresql-database-command-line/#import-a-postgresql-database).
+Resources:
+
+- [Option 1](https://www.postgresqltutorial.com/postgresql-administration/postgresql-copy-database/)
+- [Option 2](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/)
 
 ```bash
 make connect
-pg_dump -U postgres -d contacts > contacts.sql
+# Option 1.
+pg_dump -U postgres -d contacts -f contacts.sql
+# Option 2.
+pg_dump -U postgres -F p contacts > contacts.sql
 ```
 
 #### Import the database
 
-[Resource](https://kinsta.com/docs/import-export-postgresql-database-command-line/#import-a-postgresql-database).
-
-First, connect to the container:
+[Resource](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/)
 
 ```bash
 make connect
 psql -U postgres
+create database contactsnew;
+\q
+# Stop in case of error.
+cd /home/postgres/data
+psql -U postgres --set ON_ERROR_STOP=on -f contacts.sql contactsnew
+# Add schema.
+psql -U postgres
+\c contactsnew
+SET search_path TO contacts, public;
 ```
 
-If the database does not exit:
+### Connect with DBeaver
 
-```bash
-pg_dump -U postgres < contacts.sql
-```
+DBeaver configuration:
 
-The previous command will import the data to the db postgres, not to the db contacts.
+- IP: 0.0.0.0
 
 ### Stop container
 
