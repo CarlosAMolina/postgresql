@@ -15,7 +15,7 @@ docker pull postgres:15.2
 Create volume to store the database data:
 
 ```bash
-docker volume create db_postgres
+make create-volume
 ```
 
 ### Run container
@@ -23,14 +23,7 @@ docker volume create db_postgres
 Start a PostgreSQL instance:
 
 ```bash
-docker run \
-    --rm \
-    -d \
-    --name postgres-container \
-    -v db_postgres:/home/postgres/data \
-    -e POSTGRES_PASSWORD=mysecretpassword \
-    -e PGDATA=/home/postgres/data \
-    postgres
+make run
 ```
 
 Explanation:
@@ -44,14 +37,14 @@ Explanation:
 To connect to the db we have to connect to the `postgres-container` container as the user `postgres` using `psql`.
 
 ```bash
-docker exec -it postgres-container /bin/bash
+make connect
 psql -U postgres
 ```
 
 This can be done with only one command:
 
 ```bash
-docker exec -it postgres-container psql -U postgres
+make connect-psql
 ```
 
 To configure the db:
@@ -92,7 +85,7 @@ VALUES
 [Resource](https://kinsta.com/docs/import-export-postgresql-database-command-line/#import-a-postgresql-database).
 
 ```bash
-docker exec -it postgres-container /bin/bash
+make connect
 pg_dump -U postgres -d contacts > contacts.sql
 ```
 
@@ -103,7 +96,8 @@ pg_dump -U postgres -d contacts > contacts.sql
 First, connect to the container:
 
 ```bash
-psql -U postgres < contacts.sql
+make connect
+psql -U postgres
 ```
 
 If the database does not exit:
@@ -117,6 +111,6 @@ The previous command will import the data to the db postgres, not not the db con
 ### Stop container
 
 ```bash
-docker stop postgres-container
+make stop
 ```
 
