@@ -96,6 +96,7 @@ Resources:
 
 ```bash
 make connect
+cd /home/postgres/data
 # Option 1.
 pg_dump -U postgres -d contacts -f contacts.sql
 # Option 2.
@@ -111,8 +112,8 @@ make connect
 psql -U postgres
 create database contactsnew;
 \q
-# Stop in case of error.
 cd /home/postgres/data
+# Stop in case of error.
 psql -U postgres --set ON_ERROR_STOP=on -f contacts.sql contactsnew
 # Add schema.
 psql -U postgres
