@@ -7,7 +7,7 @@ POSTGRES_USER=postgres
 POSTGRES_PW=pw
 
 pull-image:
-	docker pull $(CONTAINER_NAME):$(IMAGE_VERSION)
+	docker pull $(IMAGE_NAME):$(IMAGE_VERSION)
 
 create-volume:
 	docker volume create $(CONTAINER_VOLUME)
