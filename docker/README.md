@@ -103,6 +103,8 @@ pg_dump -U postgres -d contacts -f contacts.sql
 pg_dump -U postgres -F p contacts > contacts.sql
 ```
 
+The database will be exported to the volume's path.
+
 #### Import the database
 
 [Resource](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/)
