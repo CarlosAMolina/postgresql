@@ -114,7 +114,15 @@ Resources:
 
 #### Import the database
 
-[Resource](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/)
+Run:
+
+```bash
+make import-db
+```
+
+The previous command does not add the schema.
+
+To do the process manually and add the schema, the commands are:
 
 ```bash
 make connect
@@ -126,9 +134,11 @@ create database contacts;
 psql -U postgres --set ON_ERROR_STOP=on -f /home/postgres/data/contacts.sql contacts
 # Add schema.
 psql -U postgres
-\c contactsnew
+\c contacts
 SET search_path TO contacts, public;
 ```
+
+[Resource](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/)
 
 ### Connect with DBeaver
 
