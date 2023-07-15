@@ -119,11 +119,11 @@ Resources:
 ```bash
 make connect
 psql -U postgres
-create database contactsnew;
+drop database contacts;
+create database contacts;
 \q
-cd /home/postgres/data
 # Stop in case of error.
-psql -U postgres --set ON_ERROR_STOP=on -f contacts.sql contactsnew
+psql -U postgres --set ON_ERROR_STOP=on -f /home/postgres/data/contacts.sql contacts
 # Add schema.
 psql -U postgres
 \c contactsnew
