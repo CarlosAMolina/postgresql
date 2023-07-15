@@ -1,4 +1,5 @@
 CONTAINER_DATA_PATHNAME=/home/postgres/data
+CONTAINER_DB_DUMP_FILE_PATHNAME=$(CONTAINER_DATA_PATHNAME)/db-export.sql
 CONTAINER_NAME=postgres-container
 CONTAINER_VOLUME=db_postgres
 IMAGE_NAME=postgres
@@ -30,5 +31,13 @@ connect:
 connect-psql:
 	docker exec -it $(CONTAINER_NAME) psql -U $(POSTGRES_USER)
 
+export-db:
+	echo "[DEBUG] Init dump database"
+	docker exec $(CONTAINER_NAME) \
+		pg_dump -U postgres -d contacts -f $(CONTAINER_DB_DUMP_FILE_PATHNAME)
+	echo "[DEBUG] Init export dumped database"
+	docker cp $(CONTAINER_NAME):$(CONTAINER_DB_DUMP_FILE_PATHNAME) /tmp
+
 stop:
 	docker stop $(CONTAINER_NAME)
+

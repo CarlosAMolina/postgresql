@@ -89,10 +89,13 @@ Resources:
 
 #### Export the database
 
-Resources:
+Run:
 
-- [Option 1](https://www.postgresqltutorial.com/postgresql-administration/postgresql-copy-database/)
-- [Option 2](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/)
+```bash
+make export-db
+```
+
+Or you can do it manually:
 
 ```bash
 make connect
@@ -101,9 +104,13 @@ cd /home/postgres/data
 pg_dump -U postgres -d contacts -f contacts.sql
 # Option 2.
 pg_dump -U postgres -F p contacts > contacts.sql
+# The database will be exported to the volume's path.
 ```
 
-The database will be exported to the volume's path.
+Resources:
+
+- [Option 1](https://www.postgresqltutorial.com/postgresql-administration/postgresql-copy-database/)
+- [Option 2](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/)
 
 #### Import the database
 
