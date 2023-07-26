@@ -54,7 +54,8 @@ create schema contacts;
 # List schemas.
 \dn
 # Add the new schema to the search path to work with tables in this schema without specifying the schema name.
-SET search_path TO contacts, public;
+# The schemas `"$user"` and `public` already exist, we keep them.
+SET search_path = "$user", public, contacts;
 # Show schema search path.
 SHOW search_path;
 # Show current schema.
@@ -136,7 +137,7 @@ psql -U postgres --set ON_ERROR_STOP=on -f /home/postgres/data/contacts.sql cont
 # Add schema.
 psql -U postgres
 \c contacts
-SET search_path TO contacts, public;
+SET search_path = "$user", public, contacts;
 ```
 
 [Resource](https://www.postgresqltutorial.com/postgresql-administration/postgresql-restore-database/)
