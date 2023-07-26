@@ -50,12 +50,12 @@ create database contacts;
 \l
 # Create a schema that helps you get a logical representation of the database structure.
 # Required to see the tables when you are connected with psql.
-create schema contacts;
+CREATE schema contacts;
 # List schemas.
 \dn
 # Add the new schema to the search path to work with tables in this schema without specifying the schema name.
 # The schemas `"$user"` and `public` already exist, we keep them.
-SET search_path = "$user", public, contacts;
+SET search_path TO contacts, '$user', public;
 # Show schema search path.
 SHOW search_path;
 # Show current schema.
@@ -82,6 +82,8 @@ VALUES
 # Exit the container.
 \q
 ```
+
+Note. The search_path is reset each time we connect with psql.
 
 Resources:
 - [Create db](https://www.postgresqltutorial.com/postgresql-administration/postgresql-create-database/).
