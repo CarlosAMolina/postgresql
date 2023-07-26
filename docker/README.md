@@ -51,6 +51,7 @@ create database contacts;
 # Connect to the db as the postgres user.
 \c contacts
 # Create a schema that helps you get a logical representation of the database structure.
+# Required to see the tables when you are connected with psql.
 create schema contacts;
 # List schemas.
 \dn
