@@ -48,8 +48,6 @@ To configure the db:
 create database contacts;
 # Show the current databases.
 \l
-# Connect to the db as the postgres user.
-\c contacts
 # Create a schema that helps you get a logical representation of the database structure.
 # Required to see the tables when you are connected with psql.
 create schema contacts;
@@ -61,6 +59,8 @@ SET search_path TO contacts, public;
 SHOW search_path;
 # Show current schema.
 SELECT current_schema();
+# Connect to the db as the postgres user.
+\c contacts
 # Create table.
 CREATE TABLE users (
 	id INT PRIMARY KEY,
