@@ -148,7 +148,8 @@ SET search_path = "$user", public, contacts;
 
 DBeaver configuration:
 
-- IP: 0.0.0.0
+- Host: 0.0.0.0
+- Database: contacts
 
 ### Stop container
 
